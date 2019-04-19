@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.TreeMap;
 
 class ResourceList {
-    private HashMap<String, Resource> resources = new HashMap<>();
+    private HashMap<String, RequestTimes> resources = new HashMap<>();
 
     ResourceList() {
     }
@@ -14,8 +14,8 @@ class ResourceList {
         if (resources.containsKey(resourceName)) {
             resources.get(resourceName).incrementRequestDurationTotal(requestDuration);
         } else {
-            Resource resource = new Resource(resourceName, requestDuration);
-            resources.put(resourceName, resource);
+            RequestTimes requestTimes = new RequestTimes(requestDuration);
+            resources.put(resourceName, requestTimes);
         }
     }
 
@@ -36,7 +36,6 @@ class ResourceList {
         System.out.println();
 
     }
-
 
 
 }

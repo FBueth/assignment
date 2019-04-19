@@ -23,15 +23,15 @@ class LogFile {
 
         try (BufferedReader br = new BufferedReader(new FileReader(this.fileName))) {
             while ((thisLine = br.readLine()) != null) {
-                if(!thisLine.isEmpty()) {
+                if (!thisLine.isEmpty()) {
                     parseEntry(thisLine);
                 }
             }
+            resourceList.printResources(limitForResources);
+            histogram.printHistogram();
         } catch (IOException e) {
             System.out.println("Error processing the file. Please try again.");
         }
-        resourceList.printResources(limitForResources);
-        histogram.printHistogram();
     }
 
     private void parseEntry(String entry) {
@@ -41,7 +41,7 @@ class LogFile {
         histogram.addEntry(timestamp);
 
         String resourceName = identifyResource(parts);
-        int requestDuration = Integer.parseInt(parts[parts.length-1]);
+        int requestDuration = Integer.parseInt(parts[parts.length - 1]);
         resourceList.update(resourceName, requestDuration);
     }
 

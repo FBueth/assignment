@@ -14,16 +14,17 @@ class UserInput {
 
     static boolean isValidUserInput(String[] arguments) {
         boolean argumentsValid = false;
-        switch(arguments.length) {
+
+        switch (arguments.length) {
             case 1:
-                if(isHelpFlag(arguments[0])) {
+                if (isHelpFlag(arguments[0])) {
                     System.out.println(helpMessage);
                 } else {
                     System.out.println(invalidInputMessage);
                 }
                 break;
             case 2:
-                if(isValidLogfile(arguments[0]) && isValidNumber(arguments[1])) {
+                if (isValidLogfile(arguments[0]) && isValidNumber(arguments[1])) {
                     argumentsValid = true;
                 } else {
                     System.out.println(invalidInputMessage);
@@ -44,7 +45,7 @@ class UserInput {
         return fileName.endsWith(fileFormat);
     }
 
-    private static boolean isValidNumber (String numberAsString) {
+    private static boolean isValidNumber(String numberAsString) {
         try {
             Integer.parseInt(numberAsString);
             return true;

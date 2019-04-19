@@ -8,7 +8,7 @@ public class App {
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
-        if(UserInput.isValidUserInput(args)) {
+        if (UserInput.isValidUserInput(args)) {
             LogFile currentLogFile = new LogFile(args);
             currentLogFile.processFile();
         }
