@@ -18,22 +18,16 @@ class Histogram {
     }
 
     void addEntry(String timestamp) {
-        String[] timestampParts = timestamp.split(":");
-        String hour = timestampParts[0];
-        if (isValidHour(hour)) {
-            int index = Integer.parseInt(hour);
-            hourlyRequests.set(index, hourlyRequests.get(index) + 1);
+        try {
+            String[] timestampParts = timestamp.split(":");
+            String hourAsString = timestampParts[0];
+            int hour = Integer.parseInt(hourAsString);
+            hourlyRequests.set(hour, hourlyRequests.get(hour) + 1);
+        } catch (IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Timestamp invalid:");
         }
     }
 
-    private boolean isValidHour(String hourAsString) {
-        try {
-            int hour = Integer.parseInt(hourAsString);
-            return (hour >= 0 && hour < 23);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 
     void printHistogram() {
         int divisor = limitHistogramLength();

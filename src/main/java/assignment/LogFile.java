@@ -1,16 +1,15 @@
 package assignment;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 
 class LogFile {
 
     private String fileName;
     private int limitForResources;
-
     private ResourceList resourceList = new ResourceList();
     private Histogram histogram = new Histogram();
+    private ArrayList<String> faultyEntries = new ArrayList<>();
 
     LogFile(String[] arguments) {
         this.fileName = arguments[0];
@@ -29,28 +28,47 @@ class LogFile {
             }
             resourceList.printResources(limitForResources);
             histogram.printHistogram();
+            recordFaultyEntries();
         } catch (IOException e) {
             System.out.println("Error processing the file. Please try again.");
         }
     }
 
     private void parseEntry(String entry) {
-        String[] parts = entry.split(" ");
+        try {
+            String[] parts = entry.split(" ");
 
-        String timestamp = parts[1];
-        histogram.addEntry(timestamp);
+            String timestamp = parts[1];
+            histogram.addEntry(timestamp);
 
-        String resourceName = identifyResource(parts);
-        int requestDuration = Integer.parseInt(parts[parts.length - 1]);
-        resourceList.update(resourceName, requestDuration);
+            String resourceName = identifyResource(parts);
+            int requestDuration = isValidNumber(parts[parts.length - 1]);
+            resourceList.update(resourceName, requestDuration);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            String exceptionMessage = e.getMessage() + "\n";
+            String faultyEntry = exceptionMessage.concat(entry + "\n\n");
+            faultyEntries.add(faultyEntry);
+        }
     }
 
     private String identifyResource(String[] entry) {
-        String resourceComplete = entry[4];
-        if (entry.length == 7 && hasQueryString(resourceComplete)) {
-            return parseQuery(resourceComplete);
-        } else {
-            return resourceComplete;
+        try {
+            String resourceComplete = entry[4];
+            if (entry.length == 7 && hasQueryString(resourceComplete)) {
+                return parseQuery(resourceComplete);
+            } else {
+                return resourceComplete;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Resource could not be identified:");
+        }
+    }
+
+    private int isValidNumber(String numberAsString) {
+        try {
+            return Integer.parseInt(numberAsString);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("No request duration found or not a valid number:");
         }
     }
 
@@ -73,5 +91,17 @@ class LogFile {
         int indexContentIdStart = queryString.indexOf("contentId=");
         String contentId = queryString.substring(indexContentIdStart);
         return uriString + " with " + contentId;
+    }
+
+    private void recordFaultyEntries() {
+        if (!faultyEntries.isEmpty()) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("faultyLogEntries.txt"))) {
+                for (String str : faultyEntries) {
+                    bw.write(str);
+                }
+            } catch (IOException e) {
+                System.out.println("A file for the faulty log entries could not be created.");
+            }
+        }
     }
 }
