@@ -21,7 +21,7 @@ class ResourceList {
 
     void printResources(int limit) {
         TreeMap<Integer, String> uniqueResources = new TreeMap<>(Collections.reverseOrder());
-        System.out.println("These are the top " + limit + " resources with highest average request duration in descending order:");
+        System.out.println("\nThese are the top " + limit + " resources with highest average request duration in descending order:");
         resources.forEach((k, v) -> {
             int average = v.getRequestDurationAverage();
             if (uniqueResources.size() < limit) {

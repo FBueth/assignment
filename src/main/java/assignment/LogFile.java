@@ -44,7 +44,7 @@ class LogFile {
             String resourceName = identifyResource(parts);
             int requestDuration = isValidNumber(parts[parts.length - 1]);
             resourceList.update(resourceName, requestDuration);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+        } catch (IllegalArgumentException e) {
             String exceptionMessage = e.getMessage() + "\n";
             String faultyEntry = exceptionMessage.concat(entry + "\n\n");
             faultyEntries.add(faultyEntry);
@@ -60,7 +60,7 @@ class LogFile {
                 return resourceComplete;
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Resource could not be identified:");
+            throw new IllegalArgumentException("Resource could not be identified. Expected the entry to have at least 5 parts, but found only " + entry.length, e);
         }
     }
 
@@ -68,7 +68,7 @@ class LogFile {
         try {
             return Integer.parseInt(numberAsString);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("No request duration found or not a valid number:");
+            throw new IllegalArgumentException("No valid request duration found. Expected a number but found '" + numberAsString + "'", e);
         }
     }
 
@@ -99,6 +99,7 @@ class LogFile {
                 for (String str : faultyEntries) {
                     bw.write(str);
                 }
+                System.out.println("\n" + faultyEntries.size() + " log entries could not be processed. They are saved with description in faultyLogEntries.txt.");
             } catch (IOException e) {
                 System.out.println("A file for the faulty log entries could not be created.");
             }
