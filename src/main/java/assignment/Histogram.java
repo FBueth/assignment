@@ -46,7 +46,7 @@ class Histogram {
 
     private int limitHistogramLength() {
         int maximumValue = Collections.max(hourlyRequests);
-        int divisor = 10;
+        int divisor = 1;
         while (maximumValue / divisor > 100) {
             divisor *= 10;
         }
