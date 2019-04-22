@@ -26,7 +26,11 @@ class LogFile {
                     parseEntry(thisLine);
                 }
             }
-            resourceList.printResources(limitForResources);
+            if (limitForResources > 0) {
+                resourceList.printResources(limitForResources);
+            } else {
+                System.out.println("\nNo resources requested.\n");
+            }
             histogram.printHistogram();
             recordFaultyEntries();
         } catch (IOException e) {
