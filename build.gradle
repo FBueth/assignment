@@ -9,6 +9,10 @@ jar {
     }
 }
 
+tasks.withType(Jar) {
+    destinationDirectory = file("$rootDir/dist")
+}
+
 repositories {
     jcenter()
 }
