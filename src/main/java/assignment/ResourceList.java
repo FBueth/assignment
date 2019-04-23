@@ -37,5 +37,7 @@ class ResourceList {
 
     }
 
-
+    public HashMap<String, RequestTimes> getResources() {
+        return resources;
+    }
 }
