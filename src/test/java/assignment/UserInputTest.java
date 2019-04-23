@@ -34,129 +34,139 @@ class UserInputTest {
     void helpFlagReturnsFalse() {
         //given
         String[] arguments = new String[1];
-
-        //when
         arguments[0] = "-h";
 
+        //when
+        boolean result = UserInput.isValidUserInput(arguments);
+
         //then
-        assertFalse(UserInput.isValidUserInput(arguments));
+        assertFalse(result);
     }
 
     @Test
     void helpFlagPrintsHelpMessage() {
         //given
         String[] arguments = new String[1];
+        arguments[0] = "-h";
 
         //when
-        arguments[0] = "-h";
         UserInput.isValidUserInput(arguments);
+        String printedMessage = outContent.toString().trim();
 
         //then
-        assertEquals(helpMessage, outContent.toString().trim());
+        assertEquals(helpMessage, printedMessage);
     }
 
     @Test
     void singleArgumentNotHelpFlagReturnsFalse() {
         //given
         String[] arguments = new String[1];
-
-        //when
         arguments[0] = "abc";
 
+        //when
+        boolean result = UserInput.isValidUserInput(arguments);
+
         //then
-        assertFalse(UserInput.isValidUserInput(arguments));
+        assertFalse(result);
     }
 
     @Test
     void singleArgumentNotHelpFlagPrintsInvalidInputMessage() {
         //given
         String[] arguments = new String[1];
+        arguments[0] = "abc";
 
         //when
-        arguments[0] = "abc";
         UserInput.isValidUserInput(arguments);
+        String printedMessage = outContent.toString().trim();
 
         //then
-        assertEquals(invalidInputMessage, outContent.toString().trim());
+        assertEquals(invalidInputMessage, printedMessage);
     }
 
     @Test
     void logAsFilenameReturnsTrue() {
         //given
         String[] arguments = new String[2];
-
-        //when
         arguments[0] = "test.log";
         arguments[1] = "20";
 
+        //when
+        boolean result = UserInput.isValidUserInput(arguments);
+
         //then
-        assertTrue(UserInput.isValidUserInput(arguments));
+        assertTrue(result);
     }
 
     @Test
     void txtAsFilenameReturnsFalse() {
         //given
         String[] arguments = new String[2];
-
-        //when
         arguments[0] = "test.txt";
         arguments[1] = "20";
 
+        //when
+        boolean result = UserInput.isValidUserInput(arguments);
+
         //then
-        assertFalse(UserInput.isValidUserInput(arguments));
+        assertFalse(result);
     }
 
     @Test
     void numberAsStringReturnsTrue() {
         //given
         String[] arguments = new String[2];
-
-        //when
         arguments[0] = "test.log";
         arguments[1] = "20";
 
+        //when
+        boolean result = UserInput.isValidUserInput(arguments);
+
         //then
-        assertTrue(UserInput.isValidUserInput(arguments));
+        assertTrue(result);
     }
 
     @Test
     void stringWithoutNumberReturnsFalse() {
         //given
         String[] arguments = new String[2];
-
-        //when
         arguments[0] = "test.log";
         arguments[1] = "abc";
 
+        //when
+        boolean result = UserInput.isValidUserInput(arguments);
+
         //then
-        assertFalse(UserInput.isValidUserInput(arguments));
+        assertFalse(result);
     }
 
     @Test
     void invalidUserInputPrintsInvalidInputMessage() {
         //given
         String[] arguments = new String[2];
-
-        //when
         arguments[0] = "test.txt";
         arguments[1] = "abc";
+
+        //when
         UserInput.isValidUserInput(arguments);
+        String printedMessage = outContent.toString().trim();
 
         //then
-        assertEquals(invalidInputMessage, outContent.toString().trim());
+        assertEquals(invalidInputMessage, printedMessage);
     }
 
     @Test
     void invalidUserInputReturnsFalse() {
         //given
         String[] arguments = new String[2];
-
-        //when
         arguments[0] = "test.txt";
         arguments[1] = "abc";
 
+        //when
+        boolean result = UserInput.isValidUserInput(arguments);
+
         //then
-        assertFalse(UserInput.isValidUserInput(arguments));
+        assertFalse(result);
     }
 
     @Test
@@ -166,9 +176,10 @@ class UserInputTest {
 
         //when
         UserInput.isValidUserInput(arguments);
+        String printedMessage = outContent.toString().trim();
 
         //then
-        assertEquals(invalidInputMessage, outContent.toString().trim());
+        assertEquals(invalidInputMessage, printedMessage);
     }
 
     @Test
@@ -177,9 +188,10 @@ class UserInputTest {
         String[] arguments = new String[0];
 
         //when
+        boolean result = UserInput.isValidUserInput(arguments);
 
         //then
-        assertFalse(UserInput.isValidUserInput(arguments));
+        assertFalse(result);
     }
 
     @AfterEach
