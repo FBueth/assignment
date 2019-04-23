@@ -31,7 +31,7 @@ class UserInputTest {
     }
 
     @Test
-    void helpFlagReturnsFalse() {
+    void help_flag_returns_false() {
         //given
         String[] arguments = new String[1];
         arguments[0] = "-h";
@@ -44,7 +44,7 @@ class UserInputTest {
     }
 
     @Test
-    void helpFlagPrintsHelpMessage() {
+    void help_flag_prints_helpMessage() {
         //given
         String[] arguments = new String[1];
         arguments[0] = "-h";
@@ -58,7 +58,7 @@ class UserInputTest {
     }
 
     @Test
-    void singleArgumentNotHelpFlagReturnsFalse() {
+    void single_argument_not_helpFlag_returns_false() {
         //given
         String[] arguments = new String[1];
         arguments[0] = "abc";
@@ -71,7 +71,7 @@ class UserInputTest {
     }
 
     @Test
-    void singleArgumentNotHelpFlagPrintsInvalidInputMessage() {
+    void single_argument_not_helpFlag_prints_invalidInputMessage() {
         //given
         String[] arguments = new String[1];
         arguments[0] = "abc";
@@ -85,7 +85,7 @@ class UserInputTest {
     }
 
     @Test
-    void logAsFilenameReturnsTrue() {
+    void log_as_filename_returns_true() {
         //given
         String[] arguments = new String[2];
         arguments[0] = "test.log";
@@ -99,7 +99,7 @@ class UserInputTest {
     }
 
     @Test
-    void txtAsFilenameReturnsFalse() {
+    void txt_as_filename_returns_false() {
         //given
         String[] arguments = new String[2];
         arguments[0] = "test.txt";
@@ -113,7 +113,7 @@ class UserInputTest {
     }
 
     @Test
-    void numberAsStringReturnsTrue() {
+    void number_as_string_returns_true() {
         //given
         String[] arguments = new String[2];
         arguments[0] = "test.log";
@@ -127,7 +127,7 @@ class UserInputTest {
     }
 
     @Test
-    void stringWithoutNumberReturnsFalse() {
+    void string_without_number_returns_false() {
         //given
         String[] arguments = new String[2];
         arguments[0] = "test.log";
@@ -141,7 +141,7 @@ class UserInputTest {
     }
 
     @Test
-    void invalidUserInputPrintsInvalidInputMessage() {
+    void invalid_input_prints_invalidInputMessage() {
         //given
         String[] arguments = new String[2];
         arguments[0] = "test.txt";
@@ -156,7 +156,7 @@ class UserInputTest {
     }
 
     @Test
-    void invalidUserInputReturnsFalse() {
+    void invalid_input_returns_false() {
         //given
         String[] arguments = new String[2];
         arguments[0] = "test.txt";
@@ -170,7 +170,7 @@ class UserInputTest {
     }
 
     @Test
-    void noInputPrintsInvalidInputMessage() {
+    void no_input_prints_invalidInputMessage() {
         //given
         String[] arguments = new String[0];
 
@@ -183,7 +183,7 @@ class UserInputTest {
     }
 
     @Test
-    void noInputReturnsFalse() {
+    void no_input_returns_false() {
         //given
         String[] arguments = new String[0];
 

@@ -11,7 +11,7 @@ class ResourceListTest {
     ResourceList resourceList = new ResourceList();
 
     @Test
-    void resourceNameAndDurationAreAddedToList() {
+    void resource_name_and_duration_are_added_to_list() {
         //given
         String resourceName = "testResource";
         int duration = 100;

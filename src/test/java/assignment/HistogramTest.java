@@ -12,7 +12,7 @@ class HistogramTest {
 
 
     @Test
-    void regularTimestampAddsToHourlyRequests() {
+    void regular_timestamp_adds_to_hourlyRequests() {
         //given
         String timestamp = "05:30:45,123";
 
@@ -26,7 +26,7 @@ class HistogramTest {
     }
 
     @Test
-    void numberGreaterThan23ThrowsException() {
+    void number_outside_range_throws_exception() {
         //given
         String timestamp = "28:30:45,123";
 
@@ -39,7 +39,7 @@ class HistogramTest {
     }
 
     @Test
-    void stringWithoutNumberThrowsException() {
+    void string_without_number_throws_exception() {
         //given
         String timestamp = "abc";
 
@@ -49,10 +49,6 @@ class HistogramTest {
 
         //then
         assertTrue(exceptionMessage.contains("Timestamp invalid"));
-    }
-
-    @Test
-    void printHistogram() {
     }
 
 }
