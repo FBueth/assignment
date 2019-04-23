@@ -25,7 +25,7 @@ class UserInputTest {
     private static String invalidInputMessage = "Invalid input. Please check your input or type '-h' for instructions on how to use this program.";
 
     @BeforeEach
-    public void setUpStreams() {
+    void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -195,7 +195,7 @@ class UserInputTest {
     }
 
     @AfterEach
-    public void restoreStreams() {
+    void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }

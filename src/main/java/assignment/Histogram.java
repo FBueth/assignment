@@ -23,7 +23,7 @@ class Histogram {
             String hourAsString = timestampParts[0];
             int hour = Integer.parseInt(hourAsString);
             hourlyRequests.set(hour, hourlyRequests.get(hour) + 1);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new IllegalArgumentException("Timestamp invalid. Expected a number between 0 and 23 for hours, but found " + timestamp, e);
         }
     }
@@ -53,5 +53,7 @@ class Histogram {
         return divisor;
     }
 
-
+    public ArrayList<Integer> getHourlyRequests() {
+        return hourlyRequests;
+    }
 }
